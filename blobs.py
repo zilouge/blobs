@@ -12,18 +12,14 @@ image_y_size = 1080
 blobs = 10
 max_blob_size = 1080
 min_blob_size = 10
+max_alpha = 100
 
 # create background and foreground canvas and set 'pixels' to foreground.
 # background is black and fully opaque
 background = Image.new ('RGBA', (image_x_size,image_y_size), (0,0,0,255))
-
 # foreground is black but fully transparent
 foreground = Image.new ('RGBA', (image_x_size,image_y_size), (0,0,0,0))
-
 pixels = foreground.load()
-
-alpha = 0
-max_alpha = 100
 
 
 # do for every blob
