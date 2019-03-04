@@ -11,7 +11,8 @@ image_y_size = 1080
 
 pygame.init()
 screen = pygame.display.set_mode((image_x_size, image_y_size))
-pxarray = pygame.PixelArray.surface(screen)
+surface = pygame.Surface((image_x_size, image_y_size))
+pyarray = pygame.PixelArray(surface)
 pygame.display.set_caption("Blobs")
 
 # blob properties
@@ -29,6 +30,7 @@ while carryOn:
     if event.type == pygame.QUIT:
       carryOn = False
     screen.fill((0,0,0,0))
+    pyarray[0:2073600] = (0,0,0,0)
 
     # do for every blob
     for blob in range(blobs):
@@ -99,7 +101,8 @@ while carryOn:
         for x in range(blob_visible_x_start, blob_visible_x_end, 1):
 
           # get the values for the current pixel
-          current_pixel = foreground.getpixel((x, y))
+#          current_pixel = foreground.getpixel((x, y))
+          current_pixel = [pyarray[x, y]]
 
           # calculate pixel distance from blob (hypotenuse)
           x_pos = abs(blob_origo_x - x)
@@ -139,7 +142,9 @@ while carryOn:
             a = 255
 
           # put pixel
-          pixels[x, y] = (r, g, b, a)
+          #pixels[x, y] = (r, g, b, a)
+          #surface.set_at((x, y) r, g, b, a)
+          pyarray[x,y] = (r, g, b, a)
 
 
     pygamyydisplay.flip()
